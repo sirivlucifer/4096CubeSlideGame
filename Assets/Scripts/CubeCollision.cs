@@ -5,26 +5,30 @@ using UnityEngine.UI;
 public class CubeCollision : MonoBehaviour
 {
     Cube cube ;
-  // public AudioSource audio;
+    
 
     private void Awake() {
         cube = GetComponent<Cube>();
+    
        // audio = GetComponent<AudioSource>();
     }
-           IEnumerator WaitOneSecToDeactivateTrash(Collision collision)
+           IEnumerator ss()
       {
           Debug.Log("hello before time");
+          Debug.Log("hello before time2");
           yield return new WaitForSeconds (1f);
           Debug.Log("hello after time");
       }
+
+     
     public void  OnCollisionEnter(Collision collision) {
         Cube otherCube = collision.gameObject.GetComponent<Cube>();     
         // check if contacted with other cube
         if(otherCube != null && cube.CubeID > otherCube.CubeID){
             //check if both cubes have same number
-            if(cube.CubeNumber == otherCube.CubeNumber){
-                //Debug.Log("HIT: "+cube.CubeNumber);
-                Score.score +=cube.CubeNumber*2;
+            if(cube.CubeNumber == otherCube.CubeNumber){           
+
+            Score.score +=cube.CubeNumber*2;
                Vector3 contactPoint = collision.contacts[0].point; 
                //check if cubes number less than max number in cubespawner:
                 if(otherCube.CubeNumber < CubeSpawner.Instance.maxCubeNumber){
@@ -51,7 +55,6 @@ public class CubeCollision : MonoBehaviour
                 //Destrory the two cubes: 
                 CubeSpawner.Instance.DestroyCube(cube,3f); //sonradan incele ---------!!!
                 CubeSpawner.Instance.DestroyCube(otherCube,3f);
-                 
             }
         }
 
